@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'leave_portal/css/stud_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+    <nav id="sidebar">
+        <ul class="list-unstyled components">
+          <p><img class="profile" src="/media/{{student.profile_pic}}" ></p>
+          <a href="{% url 'leave_portal:stud_detail_update' student.id %}"><p class="options">Edit Detail</p></a>
+          <a href="{% url 'leave_portal:apply_leave' student.id %}"><p class="options">Apply Leave</p></a>
+          <a href="{% url 'leave_portal:LeavePortal' student.id %}"><p class="options">See all leaves</p></a>
+          <a href="{% url 'leave_portal:apply_ta_slip' student.id %}"><p class="options">Apply for TA SLIP</p></a>
+          <a href="{% url 'leave_portal:TASlipPortal' student.id %}"><p class="options">See all TA Slips</p></a>
+        </ul>
+    </nav>
+    <div id="page-content-wrapper">
+        <div style="text-align:center">
+            <h2 class="text-info">Number Of Leaves Left</h2>
+            <hr size="25%" align="center">
+            <span style="font-weight:bold">Ordinary Leave :</span> {{student.Ordinary}}<br>
+            <span style="font-weight:bold">Medical Leave :</span> {{student.Medical}}<br>
+            <span style="font-weight:bold">Maternity Leave :</span> {{student.Maternity}}<br>
+            <span style="font-weight:bold">Paternity Leave :</span> {{student.Paternity}}<br>
+            <span style="font-weight:bold">Academic Leave :</span> {{student.Acedemic}}<br>
+        </div>
+    </div>
+</div>
+{% endblock%}

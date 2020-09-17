@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'leave_portal/css/stud_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+    <nav id="sidebar">
+        <ul class="list-unstyled components">
+          <p><img class="profile" src="/media/{{authorized.profile_pic}}" ></p>
+          {% if authorized %}
+            {% if authorized.dppc_id %}
+              <a href="{% url 'leave_portal:dppc_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% elif authorized.hod_id %}
+              <a href="{% url 'leave_portal:hod_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% elif authorized.staff_id %}
+              <a href="{% url 'leave_portal:staff_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% elif authorized.faculty_id %}
+
+              <a href="{% url 'leave_portal:faculty_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% endif %}
+          {% endif %}
+          <a href="{% url 'leave_portal:AuthorizedLeavePortal' %}"><p class="options">See all leaves</p></a>
+          
+        </ul>
+    </nav>
+    <div id="page-content-wrapper">
+        <h1>Pending Request</h1>
+        {% if forms %}
+        {% for form in forms %}
+          <div class="Requests">
+            <div class = "row">
+              <div class = "information col-lg-10 col-md-10 col-sm-12">
+                 <span style="font-weight:bold;">Name : </span> {{form.student}} <br />
+                  <span style="font-weight:bold;">Reason For Leave :</span> {{form.ReasonForLeave}} <br />
+                  <span style="font-weight:bold;">Requested Tenure :</span> {{form.LeaveFrom}} - {{form.LeaveTo}} <br />
+                  <span style="font-weight:bold;">Date Of Apply :</span> {{form.DateOfApply}} <br />
+              </div>
+              <div class = "col-lg-2 col-md-2 col-sm-12">
+                <button class="requestbutton btn btn-info" onclick="window.location='{% url 'leave_portal:leave_info' form.id %}'" type="button" class="btn btn-sm ">View Form</button>
+                <button class="requestbutton btn btn-success" onclick="window.location='{% url 'leave_portal:Approve' form.id %}'" type="button" class="btn btn-sm ">Approve</button>
+                <button class="requestbutton btn btn-danger" onclick="window.location='{% url 'leave_portal:Decline' form.id %}'" type="button" class="btn btn-sm ">Decline</button>
+              </div>
+            </div>
+          </div>
+          <hr width="125%" class="my-4">
+        {% endfor %}
+        {% else %}
+        <p class="jumbotron">No Leave Requests Right Now !!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock%}

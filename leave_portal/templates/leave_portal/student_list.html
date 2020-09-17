@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block title%}All Students {% endblock%}
+
+{% block content %}
+
+{% if student_list %}
+<ul>
+  {% for student in student_list %}
+      <!-- <li><a href="{% url 'leave_portal:studentsDetail' pk=student.id %}">{{student.name}}</a>({{student.roll_no}})</li> -->
+      <li><a href="{% url 'leave_portal:studentsDetail' pk=student.id %}">{{student.username}}</a></li>
+
+    {% empty %}
+  {% endfor %}
+</ul>
+
+{% else %}
+<p class="jumbotron">Sorry but no students!!</p>
+{% endif %}
+
+{% endblock %}

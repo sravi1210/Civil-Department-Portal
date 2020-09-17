@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block title%}{{dppc.name}}{% endblock %}
+
+{% block content %}
+
+{% if dppc %}
+<h1>{{dppc.name}}</h1>
+<p>{{dppc.webmail}}</p>
+<p>{{dppc.dppc_id}}</p>
+<p>{{dppc.mob_num}}</p>
+
+<a href="{% url 'leave_portal:dppc_dashboard' pk=dppc.id %}"><input type="button" value="Edit Detail" /></a>
+<a href="{% url 'leave_portal:dppc_pending_request'%}"><input type="button" value="Pending Request" /></a>
+
+{% endif %}
+
+{% endblock %}

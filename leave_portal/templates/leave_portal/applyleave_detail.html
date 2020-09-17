@@ -1,0 +1,26 @@
+{% extends "base_generic.html"%}
+
+{% block content %}
+  {% if applyleave%}
+    <div class="jumbotron" style="line-height:40px; text-align:center;">
+      <span style="font-weight:bold">Name : </span>{{applyleave.student.name}}
+      <br>
+      <span style="font-weight:bold">Leave From : </span>{{applyleave.LeaveFrom }}
+      <br>
+      <span style="font-weight:bold">Leave To : </span>{{applyleave.LeaveTo }}
+      <br>
+      <span style="font-weight:bold">Type Of Leave : </span>{{applyleave.TypeOfLeave}}
+      <br>
+      <span style="font-weight:bold">Reason For Leave : </span>{{applyleave.ReasonForLeave }}
+      <br>
+      <span style="font-weight:bold">Address While On Leave : </span>{{applyleave.AddressWhileOnLeave }}
+      <br>
+      <span style="font-weight:bold">Phone Number : </span>{{applyleave.PhoneNumberWhileOnLeave }}
+      <br>
+      <span style="font-weight:bold">Date Of Apply : </span>{{applyleave.DateOfApply }}
+      <br>
+    </div>
+  {% else %}
+  "error"
+  {% endif %}
+{% endblock %}

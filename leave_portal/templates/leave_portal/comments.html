@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block title%}{{leave.student.name}}{% endblock %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{form.Leave.student.name}}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

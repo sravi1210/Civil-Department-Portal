@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block title%}All Dppc{% endblock%}
+
+{% block content %}
+
+{% if dppc_list %}
+<ul>
+  {% for dppc in dppc_list %}
+      <li><a href="{% url 'leave_portal:dppcdetail' pk=dppc.id %}">{{dppc.name}}</a>({{dppc.dppc_id}})</li>
+    {% empty %}
+  {% endfor %}
+</ul>
+
+{% else %}
+<p class="jumbotron">Sorry but no dppc!!</p>
+{% endif %}
+
+{% endblock %}

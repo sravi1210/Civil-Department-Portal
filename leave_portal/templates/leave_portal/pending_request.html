@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  {% if forms %}
+  <ul>
+    {% for form in forms %}
+        <li>{{form.LeaveFrom}}-{{form.LeaveTo}} {{form.ReasonForLeave}} {{form.DateOfApply}}
+        </li>
+        <a href="{% url 'leave_portal:leave_info' pk=form.id %}"><input type="button" value="View Form" /></a>
+        <br>
+        Status : Pending
+        In-Process :
+        {% if form.flag == 1 %}
+          TA/Instructor {{ student.TA_instructor }}
+        {% elif form.flag == 2 %}
+          Supervisor {{ student.Supervisor_1 }}
+        {% elif form.flag == 3 %}
+          Dppc
+        {% elif form.flag == 4 %}
+          Staff
+        {% elif form.flag == 5 %}
+          Hod
+        {% endif %}
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Sorry but you have no forms pending!!! </p>
+  {% endif %}
+{% endblock %}

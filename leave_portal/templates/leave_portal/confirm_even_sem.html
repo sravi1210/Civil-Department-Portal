@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'leave_portal/css/stud_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+    <nav id="sidebar">
+        <ul class="list-unstyled components">
+          <p><img class="profile" src="/media/{{authorized.profile_pic}}" ></p>
+          {% if authorized %}
+            {% if authorized.dppc_id %}
+              <a href="{% url 'leave_portal:dppc_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% elif authorized.hod_id %}
+              <a href="{% url 'leave_portal:hod_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% elif authorized.staff_id %}
+              <a href="{% url 'leave_portal:staff_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+              <a href="{% url 'leave_portal:verify_update_odd_semester' %}"><p class="options">Update Odd Semester</p></a>
+              <a href="{% url 'leave_portal:verify_update_even_semester' %}"><p class="options">Update Even Semester</p></a>
+            {% elif authorized.faculty_id %}
+
+              <a href="{% url 'leave_portal:faculty_detail_update' authorized.id %}"><p class="options">Edit Detail</p></a>
+            {% endif %}
+          {% endif %}
+
+          <a href="{% url 'leave_portal:AuthorizedLeavePortal' %}"><p class="options">See all leaves</p></a>
+
+        </ul>
+    </nav>
+    <div id="page-content-wrapper">
+        <div class="jumbotron">
+            <p>Are You Sure You Want To End The Even Semester ?</p>
+            <a class="btn btn-lg btn-success" href="{% url 'leave_portal:update_even_semester' %}">YES</a>
+            <a class="btn btn-lg btn-success" href="{% url 'leave_portal:dashboard' %}">NO</a>
+        </div>
+    </div>
+</div>
+{% endblock%}

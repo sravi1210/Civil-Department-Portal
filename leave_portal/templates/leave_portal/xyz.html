@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'leave_portal/css/stud_dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+    <nav id="sidebar">
+        <ul class="list-unstyled components">
+          <p><img class="profile" src="/media/{{student.profile_pic}}" ></p>
+          {% if authorized %}
+            {% if authorized.dppc_id %}
+              <button onclick="window.location='{% url 'leave_portal:dppc_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+            {% elif authorized.hod_id %}
+              <button onclick="window.location='{% url 'leave_portal:hod_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+            {% elif authorized.staff_id %}
+              <button onclick="window.location='{% url 'leave_portal:staff_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+            {% elif authorized.faculty_id %}
+              <button onclick="window.location='{% url 'leave_portal:faculty_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+            {% endif %}
+          {% endif %}
+        </ul>
+    </nav>
+    <div id="page-content-wrapper">
+        <h1>Pending Request</h1>
+        % if forms %}
+        {% for form in forms %}
+          <p> {{form.student}} {{form.ReasonForLeave}} </p>
+          <button onclick="window.location='{% url 'leave_portal:leave_info' form.id %}'" type="button" class="btn btn-sm ">View Form</button>
+          <button onclick="window.location='{% url 'leave_portal:Approve' form.id %}'" type="button" class="btn btn-sm ">Approve</button>
+          <button onclick="window.location='{% url 'leave_portal:Decline' form.id %}'" type="button" class="btn btn-sm ">Decline</button>
+        {% endfor %}
+        {% else %}
+        <p class="jumbotron">No Leave Requests Right Now !!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock%}
+
+
+
+
+
+
+
+{% extends "base_generic.html" %}
+
+{% block title%}{{authorized.name}}{% endblock %}
+
+{% block content %}
+
+  {% if authorized %}
+  <h1 class="jumbotron">{{authorized.name}}</h1>
+    {% if authorized.dppc_id %}
+      <button onclick="window.location='{% url 'leave_portal:dppc_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+    {% elif authorized.hod_id %}
+      <button onclick="window.location='{% url 'leave_portal:hod_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+    {% elif authorized.staff_id %}
+      <button onclick="window.location='{% url 'leave_portal:staff_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+    {% elif authorized.faculty_id %}
+      <button onclick="window.location='{% url 'leave_portal:faculty_detail_update' authorized.id %}'" type="button" class="btn btn-md ">Edit Detail</button>
+    {% endif %}
+  <button onclick="window.location='{% url 'leave_portal:authorized_pending_request' %}'" type="button" class="btn btn-md ">Pending Requests</button>
+  <button onclick="window.location='{% url 'account_logout' %}'" type="button" class="btn btn-md ">Log Out!!</button>
+  {% endif %}
+
+{% endblock %}

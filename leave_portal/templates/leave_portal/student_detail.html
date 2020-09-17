@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block title%}{{student.name}}{% endblock %}
+
+{% block content %}
+
+{% if student %}
+<h1>{{student.name}}</h1>
+<!-- <img scr=""> -->
+  <!-- profile_pic = models.ImageField(upload_to='student', blank=True, null=True) -->
+<p>{{student.roll_no}}</p>
+<p>{{student.gender}}</p>
+<p>{{student.webmail}}</p>
+<p>{{student.course}}</p>
+<p>{{student.hostel_name}}</p>
+
+<a href="{% url 'leave_portal:stud_detail_update' pk=student.id %}"><input type="button" value="Edit Detail" /></a>
+<br>
+<a href="{% url 'leave_portal:apply_leave' pk=student.id %}"><input type="button" value="ApplyLeave" /></a>
+<br>
+<a href="{% url 'leave_portal:pending_request' pk=student.id %}"><input type="button" value="PendingRequest" /></a>
+{% else %}
+<p class="jumbotron">Unexpected Error</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,23 @@
+body {
+	background-image: url('../../images/bg.jpg') ;
+}
+
+.bs-example{
+    	margin: 10px;
+}
+
+.data{
+	color: white ;
+	font-size: 20px ;
+}
+.img{
+	float: left;
+	padding-right: 50px ;
+	padding-top: 10px ;
+	padding-bottom: 5px ;
+
+}
+
+.left-pad{
+	padding-left: 50px ;
+}

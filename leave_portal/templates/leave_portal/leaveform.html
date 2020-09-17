@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% load static%}
+{% load crispy_forms_tags %}
+{% block title%}{{student.name}}{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'leave_portal/css/form.css' %}">
+{% endblock %}
+{% block content %}
+<h1>Apply Leave</h1>
+<hr width="20%" height="5px"/>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-success" value="Submit">
+</form>
+{% endblock %}
